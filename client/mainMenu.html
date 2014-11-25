@@ -1,0 +1,245 @@
+<template name="mainMenu">
+<div class="big">
+  Welcome To The<br /><br />
+  .Underground.<br />
+  .Intelligence.<br />
+  .Network.
+</div>
+  <hr />
+<button class="btn btn-lg btn-default big" id="existingAgentBtn">Existing Agent</button><br />
+<button class="btn btn-lg btn-default big" id="newAgentBtn">New Agent</button>
+</template>
+
+<template name="newAgent">
+  <div class="mid">
+  Enter Your First Name<br />And Last Initial
+  </div>
+  <br />
+  <input type="text" id="nameInput" class="input input-lg mid" />
+  <br />
+  <button id="submitName" class="btn btn-lg btn-default mid">Proceed</button>
+
+  <div class="mid error hidden" id="errorMsg"></div>
+
+  <div class="footer">
+  <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back</button>
+  </div>
+</template>
+
+<template name="setPassword">
+  <div class="mid">
+    Agent <span class="big">{{name}}</span>,<br />
+    Enter Your Passcode:
+  </div>
+
+  <input type="text" id="passCode" class="input input-lg mid" />
+
+<!--
+  <hr />
+  <table style="width: 95%;">
+    <tr>
+      <td style="width: 33% text-align: center;">
+        <div>Last digit of your phone num.</div>
+        <br />
+        <table style="margin: auto;">
+          <tr>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">1</button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">2</button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">3</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">4</button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">5</button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">6</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">7</button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">8</button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">9</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-default digit-btn">0</button>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 33%">
+        <div>Last digit of your street address</div>
+      </td>
+      <td style="width: 33%">
+        <div>Last digit of your age</div>
+      </td>
+    </tr>
+  </table>
+-->
+  <div class="footer">
+    <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back</button>
+    <button class="btn btn-mid mid btn-default pull-right" id="nextBtn"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Proceed</button>
+  </div>
+</template>
+
+<template name="enterPassword">
+  <div class="mid">
+    Agent <span class="big">{{name}}</span>,<br />
+    Login With Your Passcode:
+  </div>
+
+  <input type="text" id="passCode" class="input input-lg mid" />
+  <div class="mid error" id="errorMessage"></div>
+
+  <div class="footer">
+    <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back</button>
+    <button class="btn btn-mid mid btn-default pull-right" id="nextBtn"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Proceed</button>
+  </div>
+</template>
+
+<template name="playerHome">
+<div class="mid">Hello, {{name}},<br />
+These are your missions:
+</div>
+<hr />
+  {{> courierMission courier_mission}}
+  {{> receiverMission receiver_mission}}
+
+  <div class="footer">
+    <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Logout</button>
+  </div>
+</template>
+
+<template name="courierMission">
+
+<table style="margin: auto; width: 100%;">
+<tr><td style="font-size: 100px; width: 200px;">A.</td>
+<td>
+  <div class="small">
+    Locate the recipient for your secret data.<br />
+    He/she has been instructed to be<br />
+    <div class="action">{{action_description}}</div><br />
+  </div>
+</td>
+</tr></table>
+<hr />
+</template>
+
+<template name="receiverMission">
+<table style="margin: auto; width: 100%;">
+<tr><td style="font-size: 100px; width: 200px;">B.</td>
+<td>
+  <div class="small">
+    Perform the following action:<br />
+    <div class="action">{{action_description}}</div><br />
+    when your courier finds you, take him/her back to the tablet and login to receive the secret data.
+  </div>
+  <button class="btn btn-lg btn-default" id="foundPartnerBtn">I Found My Courier</button>
+</td>
+</tr></table>
+<hr />
+</template>
+
+
+<template name="existingAgent">
+<div class="mid">Agent, Select Your Name</div>
+<hr />
+{{#each players}}
+  {{> playerItem}}
+{{/each}}
+
+  <div class="footer">
+  <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back</button>
+  </div>
+</template>
+
+<template name="playerItem">
+<button class="btn btn-mid mid btn-default player-name" style="display: inline-block;" id="{{_id}}">{{name}}</button>
+</template>
+
+
+
+<template name="foundPartner">
+<div class="mid">Who's your courier?</div>
+<hr />
+{{#each players}}
+  {{> playerItem2}}
+{{/each}}
+
+  <div class="footer">
+  <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back</button>
+  </div>
+</template>
+
+<template name="playerItem2">
+<button class="btn btn-mid mid btn-default player-name-2" style="display: inline-block;" id="{{_id}}">{{name}}</button>
+</template>
+
+
+<template name="foundPartnerLogin">
+  <div class="mid">
+    Agent <span class="big">{{name}}</span>,<br />
+    Login With Your Passcode:
+  </div>
+
+  <input type="text" id="passCode" class="input input-lg mid" />
+  <div class="mid error" id="errorMessage"></div>
+
+  <div class="footer">
+    <button class="btn btn-mid mid btn-default pull-left" id="backBtn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back</button>
+    <button class="btn btn-mid mid btn-default pull-right" id="nextBtn"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Proceed</button>
+  </div>
+</template>
+
+<template name="wrongPartner">
+<div class="mid">
+  He/She is not your courier for this mission.
+</div>
+<button class="btn btn-lg big" id="returnBtn">Return</button>
+</template>
+
+<template name="completedMission">
+<div class="mid yay">Good work {{player_name}}, you have received the secret data from {{partner_name}}.</div>
+<hr />
+<div class="mid">This secret data need to be passed on to the next agent.</div>
+<hr />
+<div class="mid yay">
+Come up with something unusual for the next agent to do so he/she may be located:
+</div>
+
+<input class="input input-lg mid" style="width: 800px;" id="createAction" /><br /><br />
+<button id="createActionBtn" class="btn btn-lg mid btn-default">Proceed</button>
+
+</template>
+
+<template name="endMission">
+<div class="mid yay">
+Excellent job.
+</div>
+<br />
+<div class="mid">
+Please show the tablet to the bartender to receive commendation for your good work.
+</div>
+
+<button id="returnBtn" class="btn btn-lg big btn-default">Done</button>
+
+</template>

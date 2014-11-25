@@ -1,0 +1,43 @@
+<template name="missions">
+<h1>Missions</h1>
+{{#each missions}}
+  {{> missionItem}}
+{{/each}}
+</template>
+
+<template name="missionItem">
+<div>
+{{started_on}}, {{courier_id}} --> {{receiver_id}}
+</div>
+</template>
+
+
+<template name="players">
+<h1>Players</h1>
+{{#each players}}
+  {{> playerAdminItem}}
+{{/each}}
+</template>
+
+<template name="playerAdminItem">
+<div>
+{{name}}, {{couriers_completed}} / {{receivers_completed}}
+</div>
+<hr />
+</template>
+
+
+<template name="actions">
+<h1>Actions</h1>
+<input id="createAction" /><button id="createActionBtn" class="btn btn-default">Add</button>
+<hr />
+{{#each actions}}
+  {{> actionAdminItem}}
+{{/each}}
+</template>
+
+<template name="actionAdminItem">
+<div>
+{{description}}, {{mission_id}}
+</div>
+</template>
